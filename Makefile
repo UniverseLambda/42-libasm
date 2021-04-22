@@ -9,7 +9,7 @@ NAME := 	libasm.a
 TESTER :=	libasm_test
 
 OBJS :=		src/ft_strlen.o		\
-			# src/ft_strcpy.o	\
+			src/ft_strcpy.o		\
 			# src/ft_strcmp.o	\
 			# src/ft_read.o		\
 			# src/ft_write.o	\
@@ -64,8 +64,7 @@ fclean:
 
 test: all
 	@echo -e "\033[31mCompiling tester...\033[0m"
-	@rustc -o $(TESTER) -g main.rs -L. -lasm
-	@# gcc -o $(TESTER) main.c libasm.a
+	@gcc -o $(TESTER) main.c libasm.a
 	@echo -e "\033[31mStarting tester...\033[0m"
 	@./$(TESTER)
 	@rm $(TESTER)
