@@ -78,17 +78,14 @@ int main() {
 	exec_strcmp("STRCMP_EMPTY_BASIC", empty, basic);
 	exec_strcmp("STRCMP_EMPTY_BIG", empty, big);
 	exec_strcmp("STRCMP_EMPTY_THEANSWER", empty, the_answer);
-
 	exec_strcmp("STRCMP_BASIC_EMPTY", basic, empty);
 	exec_strcmp("STRCMP_BASIC_BASIC", basic, basic);
 	exec_strcmp("STRCMP_BASIC_BIG", basic, big);
 	exec_strcmp("STRCMP_BASIC_THEANSWER", basic, the_answer);
-
 	exec_strcmp("STRCMP_BIG_EMPTY", big, empty);
 	exec_strcmp("STRCMP_BIG_BASIC", big, basic);
 	exec_strcmp("STRCMP_BIG_BIG", big, big);
 	exec_strcmp("STRCMP_BIG_THEANSWER", big, the_answer);
-
 	exec_strcmp("STRCMP_THEANSWER_EMPTY", the_answer, empty);
 	exec_strcmp("STRCMP_THEANSWER_BASIC", the_answer, basic);
 	exec_strcmp("STRCMP_THEANSWER_BIG", the_answer, big);
