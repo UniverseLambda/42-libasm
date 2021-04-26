@@ -7,3 +7,4 @@
 %define d_ft_read		_ft_read
 %define d_ft_write		_ft_write
 %define d_ft_strdup		_ft_strdup
+%define d_error			___errno_location
