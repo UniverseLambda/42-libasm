@@ -8,3 +8,4 @@
 %define d_ft_write		ft_write
 %define d_ft_strdup		ft_strdup
 %define d_error			__errno_location
+%define d_malloc		malloc

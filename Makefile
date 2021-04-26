@@ -13,7 +13,7 @@ OBJS :=		src/ft_strlen.o		\
 			src/ft_strcmp.o		\
 			src/ft_read.o		\
 			src/ft_write.o		\
-			# src/ft_strdup.o
+			src/ft_strdup.o
 
 #################################################
 #				TOOLS CONFIGURATION				#

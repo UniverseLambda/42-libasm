@@ -14,7 +14,7 @@ d_ft_write:
 		syscall
 		
 		test	rax, rax
-		jns		.return
+		jns		.end
 		
 		mov		rbx, -1
 		imul	rbx, rax
@@ -24,6 +24,6 @@ d_ft_write:
 		mov		[rax], rbx
 		mov		rax, -1
 
-.return:
+.end:
 		pop		rbx
 		ret

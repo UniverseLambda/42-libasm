@@ -3,12 +3,14 @@
 #include <unistd.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 extern int ft_strlen(const char *str);
 extern char *ft_strcpy(char *dst, const char *src);
 extern int ft_strcmp(const char *s0, const char *s1);
 extern ssize_t ft_read(int fd, void *buffer, size_t size);
 extern ssize_t ft_write(int fd, const void *buffer, size_t size);
+extern char *ft_strdup(const char *str);
 
 #define SPACE_PADDING 30
 #define BUFFER_SIZE 1024
@@ -297,12 +299,42 @@ static void exec_write(const char *test_name, int fd, const char *str) {
 		printf("\x1b[31mFAILED\x1b[0m (errno, result: %d, expected: %d)\n", errres, errexp);
 		return;
 	}
-	if ((compute_checksum(str, len) == checksum) != (compute_checksum(str, len) == checksum)) {
-		printf("\x1b[31mFAILED\x1b[0m (buffer preservation, result: %d, expected: %d)", ret, exp);
-		return;
-	}
 	printf("\x1b[32mPASSED\x1b[0m\n");
 }
+
+
+static void exec_strdup(const char *test_name, const char *str) {
+	char *result;
+	int checksum;
+	size_t len = strlen(str);
+
+	checksum = compute_checksum(str, len);
+	
+	printf(" * executing %s...%*c\t", test_name, SPACE_PADDING - strlen(test_name), ' ');
+
+	result = ft_strdup(str);
+
+	if (result == NULL) {
+		if (errno != ENOMEM) {
+			printf("\x1b[31mFAILED\x1b[0m (errno on NULL, result: %d, expected: %d)\n", ENOMEM, errno);
+		}
+		return;
+	}
+	
+	if (compute_checksum(str, len) != checksum) {
+		printf("\x1b[31mFAILED\x1b[0m (const correctness, string modified)\n");
+	} else {
+		if (strcmp(str, result) != 0) {
+			printf("\x1b[31mFAILED\x1b[0m (cpy, result: ```%s```, expected: ```%s```)\n", result, str);
+			return;
+		} else {
+			printf("\x1b[32mPASSED\x1b[0m\n");
+		}
+	}
+	free (result);
+}
+
+
 
 int main() {
 	const char *empty = "";
@@ -420,6 +452,11 @@ int main() {
 	exec_buffwrite(	"FTWRITE_DEVRAND_BUFFNULL_SIZE0",		fd_devrand,			NULL,			0);
 	exec_buffwrite(	"FTWRITE_DEVRAND_BUFFNEG",				fd_devrand,			(void *)(-1),	1024);
 	exec_buffwrite(	"FTWRITE_DEVRAND_BUFFNEG_SIZE0",		fd_devrand,			(void *)(-1),	0);
+
+	exec_strdup(	"STRDUP_EMPTY",							empty);
+	exec_strdup(	"STRDUP_BASIC",							basic);
+	exec_strdup(	"STRDUP_BIG",							big);
+	exec_strdup(	"STRDUP_THEANSWER",						the_answer);
 
 	close(fd_main);
 	close(fd_emptyne);
