@@ -42,31 +42,31 @@ endif
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-	@echo -e "\033[34mLinking $@...\033[0m"
+	@echo "\033[34mLinking $@...\033[0m"
 	@$(AR) $(ARFLAGS) $@ $(OBJS)
 
 conf.s: $(CONF)
-	@echo -e "\033[31mConfiguring...\033[0m"
+	@echo "\033[31mConfiguring...\033[0m"
 	@cp $(CONF) conf.s
 
 %.o: %.s 	conf.s
-	@echo -e "\033[31mCompiling $<...\033[0m"
+	@echo "\033[31mCompiling $<...\033[0m"
 	@$(AS) $(ASFLAGS) -o $@ $<
 
 re: fclean all
 
 clean:
-	@echo -e "\033[31mCleaning compilation files...\033[0m"
+	@echo "\033[31mCleaning compilation files...\033[0m"
 	@rm -f $(OBJS)
 	@rm -f conf.s
 
-fclean:
-	@echo -e "\033[31mRemoving binaries...\033[0m"
+fclean: clean
+	@echo "\033[31mRemoving binaries...\033[0m"
 	@rm -f $(NAME) $(TESTER)
 
 test: all
-	@echo -e "\033[31mCompiling tester...\033[0m"
+	@echo "\033[31mCompiling tester...\033[0m"
 	@gcc -ggdb -o $(TESTER) main.c libasm.a
-	@echo -e "\033[34mStarting tester...\033[0m"
+	@echo "\033[34mStarting tester...\033[0m"
 	@./$(TESTER)
 	@rm $(TESTER)

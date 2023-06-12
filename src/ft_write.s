@@ -19,7 +19,7 @@ d_ft_write:
 		mov		rbx, -1
 		imul	rbx, rax
 
-		call	d_error
+		call	d_error WRT ..plt
 
 		mov		[rax], rbx
 		mov		rax, -1
