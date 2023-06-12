@@ -28,7 +28,7 @@ static void exec_strlen(const char *test_name, const char *str) {
 	int exp;
 	int checksum;
 
-	printf(" * executing %s...%*c\t", test_name, SPACE_PADDING - strlen(test_name), ' ');
+	printf(" * executing %s...%*c\t", test_name, (int)(SPACE_PADDING - strlen(test_name)), ' ');
 
 	exp = strlen(str);
 
@@ -55,7 +55,7 @@ static void exec_strcpy(const char* test_name, const char *str) {
 	char buffer[len + 10];
 	int checksum;
 
-	printf(" * executing %s...%*c\t", test_name, SPACE_PADDING - strlen(test_name), ' ');
+	printf(" * executing %s...%*c\t", test_name, (int)(SPACE_PADDING - strlen(test_name)), ' ');
 
 	checksum = compute_checksum(str, len);
 
@@ -86,7 +86,7 @@ static void exec_strcmp(const char *test_name, const char *s0, const char *s1) {
 	int s0_len = strlen(s0);
 	int s1_len = strlen(s1);
 
-	printf(" * executing %s...%*c\t", test_name, SPACE_PADDING - strlen(test_name), ' ');
+	printf(" * executing %s...%*c\t", test_name, (int)(SPACE_PADDING - strlen(test_name)), ' ');
 
 	s0_checksum = compute_checksum(s0, s0_len);
 	s1_checksum = compute_checksum(s1, s1_len);
@@ -117,7 +117,7 @@ static void exec_buffread(const char *test_name, int fd, void *buffptr, size_t s
 	int errres;
 	int errexp;
 
-	printf(" * executing %s...%*c\t", test_name, SPACE_PADDING - strlen(test_name), ' ');
+	printf(" * executing %s...%*c\t", test_name, (int)(SPACE_PADDING - strlen(test_name)), ' ');
 
 	if (fd != STDIN_FILENO) {
 		lseek(fd, 0, SEEK_SET);
@@ -154,7 +154,7 @@ static void exec_read(const char *test_name, int fd) {
 	int exp;
 	int errres;
 	int errexp;
-	
+
 	char buffer[BUFFER_SIZE];
 	char ft_buffer[BUFFER_SIZE];
 
@@ -166,7 +166,7 @@ static void exec_read(const char *test_name, int fd) {
 		ft_checksum += ft_buffer[i];
 	}
 
-	printf(" * executing %s...%*c\t", test_name, SPACE_PADDING - strlen(test_name), ' ');
+	printf(" * executing %s...%*c\t", test_name, (int)(SPACE_PADDING - strlen(test_name)), ' ');
 
 	if (fd != STDIN_FILENO) {
 		lseek(fd, 0, SEEK_SET);
@@ -223,7 +223,7 @@ static void exec_buffwrite(const char *test_name, int fd, void *buffptr, size_t 
 	int errres;
 	int errexp;
 
-	printf(" * executing %s...%*c\t", test_name, SPACE_PADDING - strlen(test_name), ' ');
+	printf(" * executing %s...%*c\t", test_name, (int)(SPACE_PADDING - strlen(test_name)), ' ');
 
 	errno = 0;
 
@@ -266,7 +266,7 @@ static void exec_write(const char *test_name, int fd, const char *str) {
 
 	checksum = compute_checksum(str, len);
 
-	printf(" * executing %s...%*c\t", test_name, SPACE_PADDING - strlen(test_name), ' ');
+	printf(" * executing %s...%*c\t", test_name, (int)(SPACE_PADDING - strlen(test_name)), ' ');
 
 	if (fd == STDOUT_FILENO || fd == STDERR_FILENO) {
 		putchar('\n');
@@ -309,8 +309,8 @@ static void exec_strdup(const char *test_name, const char *str) {
 	size_t len = strlen(str);
 
 	checksum = compute_checksum(str, len);
-	
-	printf(" * executing %s...%*c\t", test_name, SPACE_PADDING - strlen(test_name), ' ');
+
+	printf(" * executing %s...%*c\t", test_name, (int)(SPACE_PADDING - strlen(test_name)), ' ');
 
 	result = ft_strdup(str);
 
@@ -320,7 +320,7 @@ static void exec_strdup(const char *test_name, const char *str) {
 		}
 		return;
 	}
-	
+
 	if (compute_checksum(str, len) != checksum) {
 		printf("\x1b[31mFAILED\x1b[0m (const correctness, string modified)\n");
 	} else {
@@ -463,7 +463,7 @@ int main() {
 	close(fd_devnull);
 	close(fd_devzero);
 	close(fd_devrand);
-	
+
 	remove("/tmp/empty_nonexisting");
 
 	return 0;
