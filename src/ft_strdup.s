@@ -29,3 +29,7 @@ d_ft_strdup:
 .end:
 		pop			rbx
 		ret
+
+
+; Required to remove linker warning
+SECTION  .note.GNU-stack

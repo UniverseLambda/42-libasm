@@ -15,3 +15,6 @@ d_ft_strlen:
 		jmp		.loop
 .end:
 		ret
+
+; Required to remove linker warning
+SECTION  .note.GNU-stack

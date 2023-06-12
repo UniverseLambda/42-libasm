@@ -21,3 +21,6 @@ d_ft_strcpy:
 
 .end:
 		ret
+
+; Required to remove linker warning
+SECTION  .note.GNU-stack

@@ -45,11 +45,11 @@ $(NAME):	$(OBJS)
 	@echo -e "\033[34mLinking $@...\033[0m"
 	@$(AR) $(ARFLAGS) $@ $(OBJS)
 
-configure:
+conf.s: $(CONF)
 	@echo -e "\033[31mConfiguring...\033[0m"
 	@cp $(CONF) conf.s
 
-%.o: %.s 	configure
+%.o: %.s 	conf.s
 	@echo -e "\033[31mCompiling $<...\033[0m"
 	@$(AS) $(ASFLAGS) -o $@ $<
 

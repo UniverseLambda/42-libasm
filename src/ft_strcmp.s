@@ -16,10 +16,13 @@ d_ft_strcmp:
 
 		test	al, al
 		jz		.end
-		
+
 		inc		rsi
 		inc		rdi
 		jmp		.loop
 
 .end:
 		ret
+
+; Required to remove linker warning
+SECTION  .note.GNU-stack

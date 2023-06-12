@@ -12,18 +12,21 @@ d_ft_write:
 
 		mov		rax, SYSCALL_WRITE
 		syscall
-		
+
 		test	rax, rax
 		jns		.end
-		
+
 		mov		rbx, -1
 		imul	rbx, rax
-		
+
 		call	d_error
-		
+
 		mov		[rax], rbx
 		mov		rax, -1
 
 .end:
 		pop		rbx
 		ret
+
+; Required to remove linker warning
+SECTION  .note.GNU-stack
